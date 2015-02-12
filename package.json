@@ -1,6 +1,6 @@
 {
   "name": "kola-hooks",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A kola signal hook executes a set of commands on dispatch of a signal",
   "main": "dist/hooks.js",
   "scripts": {
