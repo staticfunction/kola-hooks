@@ -10,27 +10,11 @@ define(["require", "exports"], function (require, exports) {
     exports.ExecutionChainTimeout = ExecutionChainTimeout;
     var ExecutionChain = (function () {
         function ExecutionChain(payload, kontext, options) {
-            var _this = this;
             this.payload = payload;
             this.kontext = kontext;
             this.options = options;
             this.currentIndex = 0;
             this.executed = {};
-            if (options.errorCommand) {
-                this.executeCommand = function (index, executable) {
-                    try {
-                        executable();
-                    }
-                    catch (e) {
-                        _this.onDone(index, e);
-                    }
-                };
-            }
-            else {
-                this.executeCommand = function (index, executable) {
-                    executable();
-                };
-            }
         }
         ExecutionChain.prototype.now = function () {
             this.next();
@@ -45,6 +29,9 @@ define(["require", "exports"], function (require, exports) {
                 if (this.options.fragile)
                     return;
             }
+            else {
+                this.currentIndex++;
+            }
             this.next();
         };
         ExecutionChain.prototype.next = function () {
@@ -58,20 +45,15 @@ define(["require", "exports"], function (require, exports) {
                     done = function (error) {
                         _this.onDone(_this.currentIndex, error);
                     };
-                    this.executeCommand(this.currentIndex, function () {
-                        command(_this.payload, _this.kontext, done);
-                    });
-                    //wait for it... but set a timeout
                     var onTimeout = function () {
                         _this.onDone(_this.currentIndex, new ExecutionChainTimeout(command));
                     };
                     this.timeoutId = setTimeout(onTimeout, this.options.timeout);
+                    command(this.payload, this.kontext, done);
                 }
                 else {
                     ;
-                    this.executeCommand(this.currentIndex, function () {
-                        command(_this.payload, _this.kontext);
-                    });
+                    command(this.payload, this.kontext);
                     this.currentIndex++;
                     this.next();
                 }
