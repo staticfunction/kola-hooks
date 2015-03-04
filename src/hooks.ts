@@ -46,23 +46,6 @@ export class ExecutionChain<T> {
         this.options = options;
         this.currentIndex = 0;
         this.executed = {};
-
-        if(options.errorCommand) {
-            this.executeCommand = (index:number, executable:() => void) => {
-                try {
-                    executable();
-                }
-                catch (e) {
-                    this.onDone(index, e);
-                }
-            }
-        }
-        else {
-            this.executeCommand =(index: number, executable: () => void) => {
-                executable();
-            }
-        }
-
     }
 
     now(): ExecutionChain<T> {
@@ -82,6 +65,9 @@ export class ExecutionChain<T> {
             if(this.options.fragile)
                 return;
         }
+        else {
+            this.currentIndex++;
+        }
 
         this.next();
     }
@@ -100,18 +86,17 @@ export class ExecutionChain<T> {
                     this.onDone(this.currentIndex, error);
                 }
 
-                this.executeCommand(this.currentIndex, () => {command(this.payload, this.kontext, done)});
-                //wait for it... but set a timeout
-
                 var onTimeout = () => {
                     this.onDone(this.currentIndex, new ExecutionChainTimeout(command));
                 }
 
                 this.timeoutId = setTimeout(onTimeout, this.options.timeout);
+
+                command(this.payload, this.kontext, done);
             }
             else {
                 ;
-                this.executeCommand(this.currentIndex, () => {command(this.payload, this.kontext)})
+                command(this.payload, this.kontext);
                 this.currentIndex++;
                 this.next();
             }
