@@ -29,9 +29,8 @@ var ExecutionChain = (function () {
             if (this.options.fragile)
                 return;
         }
-        else {
-            this.currentIndex++;
-        }
+
+        this.currentIndex++;
         this.next();
     };
     ExecutionChain.prototype.next = function () {

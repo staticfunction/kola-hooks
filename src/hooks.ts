@@ -50,7 +50,6 @@ export class ExecutionChain<T> {
 
     now(): ExecutionChain<T> {
         this.next();
-
         return this;
     }
 
@@ -65,10 +64,8 @@ export class ExecutionChain<T> {
             if(this.options.fragile)
                 return;
         }
-        else {
-            this.currentIndex++;
-        }
 
+        this.currentIndex++;
         this.next();
     }
 
