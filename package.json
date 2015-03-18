@@ -21,8 +21,5 @@
   "bugs": {
     "url": "https://github.com/staticfunction/kola-hooks/issues"
   },
-  "homepage": "https://github.com/staticfunction/kola-hooks",
-  "dependencies": {
-    "kola-signals": "0.0.1"
-  }
+  "homepage": "https://github.com/staticfunction/kola-hooks"
 }

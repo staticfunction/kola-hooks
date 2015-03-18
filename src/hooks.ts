@@ -1,8 +1,6 @@
 /**
  * Created by jcabresos on 2/12/15.
  */
-import signals = require('kola-signals');
-
 export interface Hook<T> {
     execute(payload: T, kontext: any): void;
 }
