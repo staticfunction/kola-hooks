@@ -108,7 +108,7 @@ export class ExecutionChainFactory<T> implements Hook<T>{
     private commandChain: Kommand<T>[];
     private onErrorCommand: Kommand<Error>;
     private chainBreaksOnError: boolean;
-    private timeoutMs: number;
+    private timeoutMs: number = 2000;
 
     constructor(commandChain: Kommand<T>[]) {
         this.commandChain = commandChain;
