@@ -1,6 +1,6 @@
 {
   "name": "kola-hooks",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A kola signal hook executes a set of commands on dispatch of a signal",
   "main": "dist/hooks.js",
   "scripts": {
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/staticfunction/kola-hooks.git"
+  },
+  "typescript": {
+    "definition": "dist/hooks.d.ts"
   },
   "keywords": [
     "kola",
@@ -21,5 +24,18 @@
   "bugs": {
     "url": "https://github.com/staticfunction/kola-hooks/issues"
   },
-  "homepage": "https://github.com/staticfunction/kola-hooks"
+  "homepage": "https://github.com/staticfunction/kola-hooks",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-typescript": "^2.5.0",
+    "typescript": "^1.4.1",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-filter": "^2.0.2",
+    "gulp-insert": "^0.4.0",
+    "gulp-mocha": "^0.5.1",
+    "gulp-replace": "^0.5.3",
+    "kola-hooks": "0.0.1",
+    "merge2": "^0.3.1"
+  }
 }
