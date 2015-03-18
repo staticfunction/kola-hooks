@@ -29,7 +29,6 @@ define(["require", "exports"], function (require, exports) {
                 if (this.options.fragile)
                     return;
             }
-
             this.currentIndex++;
             this.next();
         };
@@ -64,6 +63,7 @@ define(["require", "exports"], function (require, exports) {
     exports.ExecutionChain = ExecutionChain;
     var ExecutionChainFactory = (function () {
         function ExecutionChainFactory(commandChain) {
+            this.timeoutMs = 2000;
             this.commandChain = commandChain;
         }
         ExecutionChainFactory.prototype.breakChainOnError = function (value) {

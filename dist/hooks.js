@@ -28,7 +28,6 @@ var ExecutionChain = (function () {
             if (this.options.fragile)
                 return;
         }
-
         this.currentIndex++;
         this.next();
     };
@@ -63,6 +62,7 @@ var ExecutionChain = (function () {
 exports.ExecutionChain = ExecutionChain;
 var ExecutionChainFactory = (function () {
     function ExecutionChainFactory(commandChain) {
+        this.timeoutMs = 2000;
         this.commandChain = commandChain;
     }
     ExecutionChainFactory.prototype.breakChainOnError = function (value) {
